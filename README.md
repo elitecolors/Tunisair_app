@@ -1,4 +1,4 @@
-# AdminLTE-Bundle Demo
+# Tunisair app
 
 This repository contains an example Symfony 4 application for the [AdminLTE-Bundle](https://github.com/kevinpapst/AdminLTEBundle).
 
