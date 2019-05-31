@@ -41,6 +41,27 @@ class User extends BaseUser implements UserInterface, EquatableInterface
     protected $id;
 
     /**
+     * @ORM\Column(type="integer")
+     */
+    private  $stuf_number;
+
+    /**
+     * @return mixed
+     */
+    public function getStufNumber()
+    {
+        return $this->stuf_number;
+    }
+
+    /**
+     * @param mixed $stuf_number
+     */
+    public function setStufNumber($stuf_number): void
+    {
+        $this->stuf_number = $stuf_number;
+    }
+
+    /**
      * Checks if the user has to be logged out of the session,
      * due to changed fields / security related settings (like roles and teams).
      *
