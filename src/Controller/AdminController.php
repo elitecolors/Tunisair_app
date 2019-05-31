@@ -18,7 +18,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * Default controller
  */
-class DefaultController extends AbstractController
+class AdminController extends AbstractController
 {
     /**
      * @Route("/", defaults={}, name="homepage")

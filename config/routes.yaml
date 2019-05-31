@@ -9,7 +9,7 @@ controllers:
 
 home:
     path: /
-    controller: App\Controller\DefaultController::index
+    controller: App\Controller\AdminController::index
 
 fos_user_security:
     prefix: /{_locale}

@@ -18,7 +18,7 @@ admin_lte:
             template: control-sidebar/home.html.twig
         settings:
             icon: fas fa-cogs
-            controller: 'App\Controller\DefaultController::userPreferences'
+            controller: 'App\Controller\AdminController::userPreferences'
 
 #    theme:
 #        widget:
