@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * Default controller
+ * Default controller.
  */
 class AdminController extends AbstractController
 {
@@ -29,9 +29,9 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/forms", defaults={}, name="forms")
+     * @Route("/update_file", defaults={}, name="update_file")
      */
-    public function forms(Request $request)
+    public function updateFile(Request $request)
     {
         $form = $this->createForm(FormDemoModelType::class);
         $form = $this->handleForm($request, $form);
@@ -72,6 +72,10 @@ class AdminController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
+                $file = $request->files->get('form_demo_model')['file'];
+                $this->saveFile($file);
+                $this->updateDatabase();
+
                 $this->addFlash('success', 'Fantastic work! You nailed it, form has no errors :-)');
             } else {
                 $this->addFlash('error', 'Form has errors ... please fix them!');
@@ -79,6 +83,26 @@ class AdminController extends AbstractController
         }
 
         return $form;
+    }
+
+    /**
+     * uplaod file
+     * /@todo create service and check extension file only xls.
+     *
+     * @param $file
+     *
+     * @return bool
+     */
+    private function saveFile($file)
+    {
+        $original_name = $file->getClientOriginalName();
+        $file->move($this->getParameter('xls_files_directory'), $original_name);
+
+        return true;
+    }
+
+    private function updateDatabase(){
+
     }
 
     /**

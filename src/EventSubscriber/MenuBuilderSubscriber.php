@@ -56,7 +56,7 @@ class MenuBuilderSubscriber implements EventSubscriberInterface
         );
 
         $event->addItem(
-            new MenuItemModel('forms', 'menu.form', 'forms', [], 'fab fa-wpforms')
+            new MenuItemModel('update_file', 'menu.form', 'update_file', [], 'fab fa-wpforms')
         );
 
         $event->addItem(
