@@ -35,6 +35,14 @@ class AdminController extends Controller
     }
 
     /**
+     * @Route("/html", defaults={}, name="html")
+     */
+    public function showHtml()
+    {
+        return $this->render('default/print_html.html.twig', []);
+    }
+
+    /**
      * @Route("/update_file", defaults={}, name="update_file")
      */
     public function updateFile(Request $request)

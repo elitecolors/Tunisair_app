@@ -16,6 +16,10 @@ use KevinPapst\AdminLTEBundle\Model\MenuItemModel;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Security\Core\Security;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+
+use KevinPapst\AdminLTEBundle\Model\UserModel;
 
 /**
  * Class MenuBuilder configures the main navigation.
@@ -29,12 +33,15 @@ class MenuBuilderSubscriber implements EventSubscriberInterface
 
     private $entityManger;
 
+    private $user;
+
     /**
      * @param AuthorizationCheckerInterface $security
      */
-    public function __construct(AuthorizationCheckerInterface $security,EntityManagerInterface $entityManager)
+    public function __construct(AuthorizationCheckerInterface $security,EntityManagerInterface $entityManager,TokenStorageInterface $tokenStorage)
     {
         $this->security = $security;
+        $this->user = $tokenStorage->getToken()->getUser();
 
         /**
          * @var EntityManager
@@ -68,13 +75,25 @@ class MenuBuilderSubscriber implements EventSubscriberInterface
             new MenuItemModel('update_file', 'Update Database', 'update_file', [], 'fab fa-wpforms')
         );
 
-        $demo = new MenuItemModel('demo', 'Formation', null, [], 'far fa-arrow-alt-circle-right');
-        $demo->addChild(
-            new MenuItemModel('sub-demo', 'Form - Horizontal', 'formation', array('id'=>1), 'far fa-arrow-alt-circle-down')
-        )->addChild(
-            new MenuItemModel('sub-demo2', 'Form - Sidebar', 'formation', array('id'=>2), 'far fa-arrow-alt-circle-up')
+        $event->addItem(
+            new MenuItemModel('html', 'Show html', 'html', [], 'fab fa-wpforms')
         );
-        $event->addItem($demo);
+
+        $repos=$this->entityManger->getRepository('App:Model');
+        $model=$repos->findByUserId($this->user->getId());
+
+        $model=$this->entityManger->getRepository('App:Model')->findByUserId( 1);
+        if ($this->security->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+            if(!empty($model)){
+                foreach ($model as $row){
+                    $demo = new MenuItemModel('demo', 'Formation', null, [], 'far fa-arrow-alt-circle-right');
+                    $demo->addChild(
+                        new MenuItemModel($row->getId(), $row->getName(), 'formation', array('id' => $row->getId()), 'far fa-arrow-alt-circle-down')
+                    );
+                    $event->addItem($demo);
+                }
+            }
+        }
 
         if ($this->security->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             $event->addItem(
