@@ -26,3 +26,12 @@ fos_user_resetting:
 fos_user_profile:
     prefix: /{_locale}/profile
     resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
+
+formation:
+        path: /{_locale}/formation/{id}
+        controller: App\Controller\AdminController::formation
+print:
+  path: /{_locale}/print/{id}
+  controller: App\Controller\PdfController::print
+
+

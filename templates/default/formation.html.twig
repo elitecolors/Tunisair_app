@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block page_title %}Twig Context Helper{% endblock %}
+{% block page_subtitle %}available AdminLTE configurations{% endblock %}
+
+{% block page_content %}
+    {% block stylesheets %}
+        {{ parent() }}
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+    {% endblock %}
+
+    <table id="example" class="table table-striped table-bordered" style="width:100%">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>realise</th>
+            <th>value</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for formation in data  %}
+            <tr>
+            <td>{{ formation.getName() }}</td>
+            <td>{{ formation.getRealise() }}</td>
+            <td>{{ formation.getValue() }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+        <tfoot>
+        <tr>
+            <th>Name</th>
+            <th>realise</th>
+            <th>value</th>
+        </tr>
+        </tfoot>
+    </table>
+ <div class="row">
+<div class="container" style="text-align: center">
+    <a href="{{ path('print',{'id': 1})  }}">
+    <button type="button" class="btn btn-primary btn-lg">Imprimer</button>
+    </a>
+</div>
+ </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+    <script>
+    $(document).ready(function() {
+    $('#example').DataTable();
+    } );
+    </script>
+{% endblock %}

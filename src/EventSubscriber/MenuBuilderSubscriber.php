@@ -9,11 +9,13 @@
 
 namespace App\EventSubscriber;
 
+use Doctrine\ORM\EntityManager;
 use KevinPapst\AdminLTEBundle\Event\SidebarMenuEvent;
 use KevinPapst\AdminLTEBundle\Event\ThemeEvents;
 use KevinPapst\AdminLTEBundle\Model\MenuItemModel;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
+use Doctrine\ORM\EntityManagerInterface;
 
 /**
  * Class MenuBuilder configures the main navigation.
@@ -25,12 +27,19 @@ class MenuBuilderSubscriber implements EventSubscriberInterface
      */
     private $security;
 
+    private $entityManger;
+
     /**
      * @param AuthorizationCheckerInterface $security
      */
-    public function __construct(AuthorizationCheckerInterface $security)
+    public function __construct(AuthorizationCheckerInterface $security,EntityManagerInterface $entityManager)
     {
         $this->security = $security;
+
+        /**
+         * @var EntityManager
+         */
+        $this->entityManger=$entityManager;
     }
 
     /**
@@ -56,18 +65,14 @@ class MenuBuilderSubscriber implements EventSubscriberInterface
         );
 
         $event->addItem(
-            new MenuItemModel('update_file', 'menu.form', 'update_file', [], 'fab fa-wpforms')
+            new MenuItemModel('update_file', 'Update Database', 'update_file', [], 'fab fa-wpforms')
         );
 
-        $event->addItem(
-            new MenuItemModel('context', 'AdminLTE context', 'context', [], 'fas fa-code')
-        );
-
-        $demo = new MenuItemModel('demo', 'Demo', null, [], 'far fa-arrow-alt-circle-right');
+        $demo = new MenuItemModel('demo', 'Formation', null, [], 'far fa-arrow-alt-circle-right');
         $demo->addChild(
-            new MenuItemModel('sub-demo', 'Form - Horizontal', 'forms2', [], 'far fa-arrow-alt-circle-down')
+            new MenuItemModel('sub-demo', 'Form - Horizontal', 'formation', array('id'=>1), 'far fa-arrow-alt-circle-down')
         )->addChild(
-            new MenuItemModel('sub-demo2', 'Form - Sidebar', 'forms3', [], 'far fa-arrow-alt-circle-up')
+            new MenuItemModel('sub-demo2', 'Form - Sidebar', 'formation', array('id'=>2), 'far fa-arrow-alt-circle-up')
         );
         $event->addItem($demo);
 

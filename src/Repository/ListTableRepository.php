@@ -19,22 +19,22 @@ class ListTableRepository extends ServiceEntityRepository
         parent::__construct($registry, ListTable::class);
     }
 
-    // /**
-    //  * @return ListTable[] Returns an array of ListTable objects
-    //  */
-    /*
-    public function findByExampleField($value)
+     /**
+      * @return ListTable[] Returns an array of ListTable objects
+      */
+
+    public function findByUser($user,$model)
     {
         return $this->createQueryBuilder('l')
-            ->andWhere('l.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('l.id', 'ASC')
-            ->setMaxResults(10)
+            ->andWhere('l.id_user = :id_user')
+            ->setParameter('id_user', $user)
+            ->andWhere('l.id_model = :model')
+            ->setParameter('model', $model)
             ->getQuery()
             ->getResult()
         ;
     }
-    */
+
 
     /*
     public function findOneBySomeField($value): ?ListTable

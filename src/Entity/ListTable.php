@@ -36,6 +36,27 @@ class ListTable
      */
     private $id_model;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $id_user;
+
+    /**
+     * @return mixed
+     */
+    public function getIdUser()
+    {
+        return $this->id_user;
+    }
+
+    /**
+     * @param mixed $id_user
+     */
+    public function setIdUser($id_user): void
+    {
+        $this->id_user = $id_user;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
