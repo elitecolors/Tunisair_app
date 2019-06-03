@@ -90,11 +90,11 @@
                 <form>
                     <div>
                         <label for="first_name">First Name :</label>
-                        <label for="name">..............</label>
+                        <label for="name">{{ user.getUserName() }}</label>
                     </div>
                     <div>
                         <label for="last_name">Last Name :</label>
-                        <label for="name">..............</label>
+                        <label for="name">{{ user.getUserName() }}</label>
                     </div>
                     <div>
                         <label for="licence">Licence N° :</label>
@@ -103,16 +103,16 @@
 
                     <div>
                         <label for="staff">Staff N° :</label>
-                        <label for="name">..............</label>
+                        <label for="name">{{ user.getStufNumber() }}</label>
                     </div>
 
                     <div>
                         <label for="position">Position :</label>
-                        Capt. <input type="checkbox"  >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        F/O <input type="checkbox"  >&nbsp;
-                        B737-600 <input type="checkbox" >&nbsp;&nbsp;&nbsp;
-                        A320/A319 <input type="checkbox">&nbsp;&nbsp;&nbsp;
-                        A330 <input type="checkbox" >
+                        Capt. <input type="checkbox" {% if  model.getName =='SUIVI A320s' %} checked {% endif %} >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        F/O <input type="checkbox" {% if  model.getName =='SUIVI A320d' %} checked {% endif %} >&nbsp;
+                        B737-600 <input type="checkbox" {% if  model.getName =='SUIVI B737' %} checked {% endif %} >&nbsp;&nbsp;&nbsp;
+                        A320/A319 <input type="checkbox"  {% if  model.getName =='SUIVsI A320' %} checked {% endif %} >&nbsp;&nbsp;&nbsp;
+                        A330 <input type="checkbox" {% if  model.getName =='SUIVI A320' %} checked {% endif %} >
                     </div>
 
                 </form>
@@ -156,16 +156,16 @@
 
     <tr>
 
-        <td>25-10-2014</td>
-        <td></td>
-        <td></td>
-
-        <td>25-10-2012</td>
-        <td></td>
+        <td>{{ formation['M.D./2ans']['realise'] }}</td>
+        <td>{{ formation['M.D./2ans']['value'] }}</td>
         <td></td>
 
+        <td>{{ formation['S.S./1an']['realise'] }}</td>
+        <td>{{ formation['S.S./1an']['value'] }}</td>
         <td></td>
-        <td></td>
+
+        <td>{{ formation['FH']['realise'] }}</td>
+        <td>{{ formation['FH']['value'] }}</td>
         <td></td>
 
     </tr>
@@ -341,11 +341,31 @@
 
     <tr>
 
-        <td>25-10-2014</td>
+        <td>{{ formation['SURETE']['realise'] }}</td>
+        <td>{{ formation['SURETE']['value'] }}</td>
+        <td></td>
+
+        <td>{{ formation['C1']['realise'] }}</td>
+        <td>{{ formation['C1']['value'] }}</td>
+        <td></td>
+
+        <td>{{ formation['C2']['realise'] }}</td>
+        <td>{{ formation['C2']['value'] }}</td>
+        <td></td>
+
+        <td>{{ formation['FH']['realise'] }}</td>
+        <td>{{ formation['FH']['realise'] }}</td>
+        <td></td>
+
+    </tr>
+
+    <tr>
+
+        <td></td>
         <td></td>
         <td></td>
 
-        <td>25-10-2012</td>
+        <td></td>
         <td></td>
         <td></td>
 
@@ -361,31 +381,11 @@
 
     <tr>
 
-        <td>25-10-2014</td>
-        <td></td>
-        <td></td>
-
-        <td>25-10-2012</td>
-        <td></td>
-        <td></td>
-
         <td></td>
         <td></td>
         <td></td>
 
         <td></td>
-        <td></td>
-        <td></td>
-
-    </tr>
-
-    <tr>
-
-        <td>25-10-2014</td>
-        <td></td>
-        <td></td>
-
-        <td>25-10-2012</td>
         <td></td>
         <td></td>
 
@@ -401,31 +401,11 @@
 
     <tr>
 
-        <td>25-10-2014</td>
-        <td></td>
-        <td></td>
-
-        <td>25-10-2012</td>
-        <td></td>
-        <td></td>
-
         <td></td>
         <td></td>
         <td></td>
 
         <td></td>
-        <td></td>
-        <td></td>
-
-    </tr>
-
-    <tr>
-
-        <td>25-10-2014</td>
-        <td></td>
-        <td></td>
-
-        <td>25-10-2012</td>
         <td></td>
         <td></td>
 
@@ -441,31 +421,11 @@
 
     <tr>
 
-        <td>25-10-2014</td>
-        <td></td>
-        <td></td>
-
-        <td>25-10-2012</td>
-        <td></td>
-        <td></td>
-
         <td></td>
         <td></td>
         <td></td>
 
         <td></td>
-        <td></td>
-        <td></td>
-
-    </tr>
-
-    <tr>
-
-        <td>25-10-2014</td>
-        <td></td>
-        <td></td>
-
-        <td>25-10-2012</td>
         <td></td>
         <td></td>
 
@@ -479,25 +439,6 @@
 
     </tr>
 
-    <tr>
-
-        <td>25-10-2014</td>
-        <td></td>
-        <td></td>
-
-        <td>25-10-2012</td>
-        <td></td>
-        <td></td>
-
-        <td></td>
-        <td></td>
-        <td></td>
-
-        <td></td>
-        <td></td>
-        <td></td>
-
-    </tr>
 
 
 </table>

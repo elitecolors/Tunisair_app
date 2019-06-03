@@ -22,8 +22,28 @@ class PdfController extends Controller
     /**
      * @Route("/print", defaults={}, name="print")
      */
-    public function print()
+    public function print($id)
     {
+        // get user
+        $repo=$this->getDoctrine()->getRepository('App:ListTable');
+
+        $user = $this->getUser();
+
+        $repoModel=$this->getDoctrine()->getRepository('App:Model');
+
+        $listable=$repo->findByUser($user->getId(),$id);
+
+        $model=$repoModel->find($id);
+
+        $formation=array();
+        if(!empty($listable)){
+            foreach ($listable as $row){
+                $formation[$row->getName()]['realise']=$row->getRealise();
+                $formation[$row->getName()]['value']=$row->getRealise();
+
+            }
+        }
+
         // Configure Dompdf according to your needs
         $pdfOptions = new Options();
         $pdfOptions->set('defaultFont', 'Arial');
@@ -33,7 +53,9 @@ class PdfController extends Controller
 
         // Retrieve the HTML generated in our twig file
         $html = $this->renderView('default/print.html.twig', [
-            'title' => "Welcome to our PDF Test"
+            'formation' => $formation,
+            'user'=>$user,
+            'model'=>$model
         ]);
 
         // Load HTML to Dompdf

@@ -75,15 +75,20 @@ class MenuBuilderSubscriber implements EventSubscriberInterface
             new MenuItemModel('update_file', 'Update Database', 'update_file', [], 'fab fa-wpforms')
         );
 
-        $event->addItem(
-            new MenuItemModel('html', 'Show html', 'html', [], 'fab fa-wpforms')
-        );
+//        $event->addItem(
+  //          new MenuItemModel('html', 'Show html', 'html', [], 'fab fa-wpforms')
+    //    );
 
         $repos=$this->entityManger->getRepository('App:Model');
-        $model=$repos->findByUserId($this->user->getId());
 
-        $model=$this->entityManger->getRepository('App:Model')->findByUserId( 1);
         if ($this->security->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+
+            if(!empty($this->user->getId())){
+            $model=$repos->findByUserId($this->user->getId());
+
+            $model=$this->entityManger->getRepository('App:Model')->findByUserId( $this->user->getId());
+        }
+
             if(!empty($model)){
                 foreach ($model as $row){
                     $demo = new MenuItemModel('demo', 'Formation', null, [], 'far fa-arrow-alt-circle-right');

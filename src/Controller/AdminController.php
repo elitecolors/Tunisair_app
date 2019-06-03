@@ -252,9 +252,11 @@ class AdminController extends Controller
         $repos = $this->getDoctrine()
             ->getRepository(ListTable::class);
 
-        $result=$repos->findByUser(1,$id);
+        $user = $this->getUser()->getId();
 
-        return $this->render('default/formation.html.twig', array('data'=>$result));
+        $result=$repos->findByUser($user,$id);
+
+        return $this->render('default/formation.html.twig', array('data'=>$result,'model'=>$id));
     }
 
     public function userPreferences()
