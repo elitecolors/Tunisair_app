@@ -1,4 +1,10 @@
 {
+    "aspera/xlsx-reader": {
+        "version": "v0.7.4"
+    },
+    "box/spout": {
+        "version": "v3.0.0"
+    },
     "composer/semver": {
         "version": "1.4.2"
     },
@@ -71,6 +77,9 @@
     "doctrine/reflection": {
         "version": "v1.0.0"
     },
+    "dompdf/dompdf": {
+        "version": "v0.8.3"
+    },
     "easycorp/easy-log-handler": {
         "version": "1.0",
         "recipe": {
@@ -113,8 +122,14 @@
     "monolog/monolog": {
         "version": "1.23.0"
     },
+    "neitanod/forceutf8": {
+        "version": "v2.0.2"
+    },
     "nikic/php-parser": {
         "version": "v4.2.2"
+    },
+    "nuovo/spreadsheet-reader": {
+        "version": "0.5.11"
     },
     "ocramius/package-versions": {
         "version": "1.3.0"
@@ -125,8 +140,17 @@
     "paragonie/random_compat": {
         "version": "v2.0.17"
     },
+    "phenx/php-font-lib": {
+        "version": "0.5.1"
+    },
+    "phenx/php-svg-lib": {
+        "version": "v0.3.2"
+    },
     "php-cs-fixer/diff": {
         "version": "v1.3.0"
+    },
+    "phpoffice/phpspreadsheet": {
+        "version": "1.0.0"
     },
     "psr/cache": {
         "version": "1.0.1"
@@ -139,6 +163,9 @@
     },
     "psr/simple-cache": {
         "version": "1.0.1"
+    },
+    "sabberworm/php-css-parser": {
+        "version": "8.1.0"
     },
     "sensio/framework-extra-bundle": {
         "version": "4.0",

@@ -61,7 +61,7 @@ class AdminController extends Controller
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
                 $file = $request->files->get('form_demo_model')['file'];
-//                $this->saveFile($file);
+                $this->saveFile($file);
                 $this->updateDatabase();
 
                 $this->addFlash('success', 'Fantastic work! You nailed it, form has no errors :-)');
