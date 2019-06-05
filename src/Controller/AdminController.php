@@ -89,63 +89,67 @@ class AdminController extends Controller
         return true;
     }
 
-    private function updateDatabase(){
+    private function updateDatabase()
+    {
         /**
          * @var EntityManager
          */
         $entityManager = $this->getDoctrine()->getManager();
 
-        $file=$this->getParameter('xls_files_directory').'/xls.xls';
+        $file = $this->getParameter('xls_files_directory').'/xls.xls';
         if (!file_exists($file)) {
             throw new \Exception('File does not exist');
         }
         $Reader = new SpreadsheetReader($file);
-        $Sheets = $Reader -> Sheets();
+        $Sheets = $Reader->Sheets();
 
-        foreach ($Sheets as $Index => $Name)
-        {
-            if (strpos($Name, 'Feuil') !== false) {
+        // CLEAN TABLE MODEL AND LIST TABLE BEFORE INSERTION
+        $this->cleanDatabase($entityManager);
+
+        foreach ($Sheets as $Index => $Name) {
+            if (false !== strpos($Name, 'Feuil')) {
                 continue;
             }
 
-            $model= new Model();
+            $model = new Model();
             $model->setName(Encoding::fixUTF8($Name));
 
             $entityManager->persist($model);
             $entityManager->flush();
 
-            $Reader -> ChangeSheet($Index);
+            $Reader->ChangeSheet($Index);
 
-            foreach ($Reader as $Row)
-            {
-                if(!empty($Row[1]) && !empty($Row[2]) && $Row[3] !='REALISE' ){
-                    $user=$this->createUser($Row,$entityManager);
+            foreach ($Reader as $Row) {
+                if (!empty($Row[1]) && !empty($Row[2]) && 'REALISE' != $Row[3]) {
+                    $user = $this->createUser($Row, $entityManager);
 
-                    if($user)
-                      $this->saveFormation($Row,$user,$model->getId(),$entityManager);
+                    $this->saveFormation($Row, $user, $model->getId(), $entityManager);
                 }
             }
         }
     }
 
     /**
-     * add user
+     * add user.
+     *
      * @param $row
      * @param $db
+     *
      * @return bool|mixed
      */
-    private function createUser($row,$db){
+    private function createUser($row, $db)
+    {
         /** @var $userManager \FOS\UserBundle\Model\UserManagerInterface */
         $userManager = $this->get('fos_user.user_manager');
 
-        $email=Encoding::fixUTF8($row[2].'@tunisair.com');
-        $username=Encoding::fixUTF8($row[2]);
-        $password=Encoding::fixUTF8($row[1]);
-        $email_exist = $userManager->findUserByEmail($email);
+        $email = Encoding::fixUTF8($row[2].'@tunisair.com');
+        $username = Encoding::fixUTF8($row[2]);
+        $password = Encoding::fixUTF8($row[1]);
+        $user_exist = $userManager->findUserByEmail($email);
 
         // Check if the user exists to prevent Integrity constraint violation error in the insertion
-        if($email_exist){
-            return false;
+        if ($user_exist) {
+            return $user_exist->getId();
         }
 
         $user = $userManager->createUser();
@@ -166,11 +170,12 @@ class AdminController extends Controller
      * @param $user
      * @param $model
      * @param $db
+     *
      * @return bool
      */
-    private function saveFormation($row,$user,$model,$db){
-
-        $listTable=new ListTable();
+    private function saveFormation($row, $user, $model, $db)
+    {
+        $listTable = new ListTable();
         $listTable->setName('M.D./2ans');
         $listTable->setRealise($row[3]);
         $listTable->setValue($row[6]);
@@ -180,7 +185,7 @@ class AdminController extends Controller
         $db->persist($listTable);
         $db->flush();
 
-        $listTable=new ListTable();
+        $listTable = new ListTable();
         $listTable->setName('S.S./1an');
         $listTable->setRealise($row[6]);
         $listTable->setValue($row[9]);
@@ -190,7 +195,7 @@ class AdminController extends Controller
         $db->persist($listTable);
         $db->flush();
 
-        $listTable=new ListTable();
+        $listTable = new ListTable();
         $listTable->setName('FH');
         $listTable->setRealise($row[9]);
         $listTable->setValue($row[12]);
@@ -200,7 +205,7 @@ class AdminController extends Controller
         $db->persist($listTable);
         $db->flush();
 
-        $listTable=new ListTable();
+        $listTable = new ListTable();
         $listTable->setName('SURETE');
         $listTable->setRealise($row[12]);
         $listTable->setValue($row[15]);
@@ -210,7 +215,7 @@ class AdminController extends Controller
         $db->persist($listTable);
         $db->flush();
 
-        $listTable=new ListTable();
+        $listTable = new ListTable();
         $listTable->setName('C1');
         $listTable->setRealise($row[15]);
         $listTable->setValue($row[18]);
@@ -220,7 +225,7 @@ class AdminController extends Controller
         $db->persist($listTable);
         $db->flush();
 
-        $listTable=new ListTable();
+        $listTable = new ListTable();
         $listTable->setName('C2');
         $listTable->setRealise($row[18]);
         $listTable->setValue($row[21]);
@@ -230,7 +235,7 @@ class AdminController extends Controller
         $db->persist($listTable);
         $db->flush();
 
-        $listTable=new ListTable();
+        $listTable = new ListTable();
         $listTable->setName('LICENCE');
         $listTable->setRealise($row[20]);
         $listTable->setValue($row[20]);
@@ -241,9 +246,24 @@ class AdminController extends Controller
         $db->flush();
 
         return true;
-
     }
 
+    /**
+     * @param EntityManager $db
+     * @throws \Doctrine\DBAL\DBALException
+     */
+    private function cleanDatabase(EntityManager $db)
+    {
+        $connection = $db->getConnection();
+        $platform = $connection->getDatabasePlatform();
+        $connection->executeUpdate($platform->getTruncateTableSQL('model', true /* whether to cascade */));
+        $connection->executeUpdate($platform->getTruncateTableSQL('list_table', true /* whether to cascade */));
+    }
+
+    /**
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function formation($id)
     {
         /**
@@ -254,9 +274,9 @@ class AdminController extends Controller
 
         $user = $this->getUser()->getId();
 
-        $result=$repos->findByUser($user,$id);
+        $result = $repos->findByUser($user, $id);
 
-        return $this->render('default/formation.html.twig', array('data'=>$result,'model'=>$id));
+        return $this->render('default/formation.html.twig', ['data' => $result, 'model' => $id]);
     }
 
     public function userPreferences()
