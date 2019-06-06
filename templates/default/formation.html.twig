@@ -13,16 +13,16 @@
         <thead>
         <tr>
             <th>Name</th>
-            <th>realise</th>
             <th>value</th>
+            <th>realise</th>
         </tr>
         </thead>
         <tbody>
         {% for formation in data  %}
             <tr>
             <td>{{ formation.getName() }}</td>
-            <td>{{ formation.getRealise() }}</td>
             <td>{{ formation.getValue() }}</td>
+            <td>{{ formation.getRealise() }}</td>
         </tr>
         {% endfor %}
         </tbody>

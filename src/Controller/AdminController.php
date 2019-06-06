@@ -83,7 +83,9 @@ class AdminController extends Controller
      */
     private function saveFile($file)
     {
-        $original_name = $file->getClientOriginalName();
+        // set name static to change next add input name and service
+        //$original_name = $file->getClientOriginalName();
+        $original_name = 'xls'.$file->getClientOriginalExtension();
         $file->move($this->getParameter('xls_files_directory'), $original_name);
 
         return true;
@@ -177,8 +179,8 @@ class AdminController extends Controller
     {
         $listTable = new ListTable();
         $listTable->setName('M.D./2ans');
-        $listTable->setRealise($row[4]);
-        $listTable->setValue($row[6]);
+        $listTable->setRealise($row[6]);
+        $listTable->setValue($row[4]);
         $listTable->setIdModel($model);
         $listTable->setIdUser($user);
 
@@ -187,8 +189,8 @@ class AdminController extends Controller
 
         $listTable = new ListTable();
         $listTable->setName('S.S./1an');
-        $listTable->setRealise($row[7]);
-        $listTable->setValue($row[9]);
+        $listTable->setRealise($row[9]);
+        $listTable->setValue($row[7]);
         $listTable->setIdModel($model);
         $listTable->setIdUser($user);
 
@@ -197,8 +199,8 @@ class AdminController extends Controller
 
         $listTable = new ListTable();
         $listTable->setName('FH');
-        $listTable->setRealise($row[10]);
-        $listTable->setValue($row[12]);
+        $listTable->setRealise($row[12]);
+        $listTable->setValue($row[10]);
         $listTable->setIdModel($model);
         $listTable->setIdUser($user);
 
@@ -207,8 +209,8 @@ class AdminController extends Controller
 
         $listTable = new ListTable();
         $listTable->setName('SURETE');
-        $listTable->setRealise($row[13]);
-        $listTable->setValue($row[15]);
+        $listTable->setRealise($row[15]);
+        $listTable->setValue($row[13]);
         $listTable->setIdModel($model);
         $listTable->setIdUser($user);
 
@@ -217,8 +219,8 @@ class AdminController extends Controller
 
         $listTable = new ListTable();
         $listTable->setName('C1');
-        $listTable->setRealise($row[16]);
-        $listTable->setValue($row[18]);
+        $listTable->setRealise($row[18]);
+        $listTable->setValue($row[16]);
         $listTable->setIdModel($model);
         $listTable->setIdUser($user);
 
@@ -227,8 +229,8 @@ class AdminController extends Controller
 
         $listTable = new ListTable();
         $listTable->setName('C2');
-        $listTable->setRealise($row[19]);
-        $listTable->setValue($row[21]);
+        $listTable->setRealise($row[21]);
+        $listTable->setValue($row[19]);
         $listTable->setIdModel($model);
         $listTable->setIdUser($user);
 

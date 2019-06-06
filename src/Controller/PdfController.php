@@ -39,7 +39,7 @@ class PdfController extends Controller
         if(!empty($listable)){
             foreach ($listable as $row){
                 $formation[$row->getName()]['realise']=$row->getRealise();
-                $formation[$row->getName()]['value']=$row->getRealise();
+                $formation[$row->getName()]['value']=$row->getValue();
 
             }
         }
