@@ -177,7 +177,7 @@ class AdminController extends Controller
     {
         $listTable = new ListTable();
         $listTable->setName('M.D./2ans');
-        $listTable->setRealise($row[3]);
+        $listTable->setRealise($row[4]);
         $listTable->setValue($row[6]);
         $listTable->setIdModel($model);
         $listTable->setIdUser($user);
@@ -187,7 +187,7 @@ class AdminController extends Controller
 
         $listTable = new ListTable();
         $listTable->setName('S.S./1an');
-        $listTable->setRealise($row[6]);
+        $listTable->setRealise($row[7]);
         $listTable->setValue($row[9]);
         $listTable->setIdModel($model);
         $listTable->setIdUser($user);
@@ -197,7 +197,7 @@ class AdminController extends Controller
 
         $listTable = new ListTable();
         $listTable->setName('FH');
-        $listTable->setRealise($row[9]);
+        $listTable->setRealise($row[10]);
         $listTable->setValue($row[12]);
         $listTable->setIdModel($model);
         $listTable->setIdUser($user);
@@ -207,7 +207,7 @@ class AdminController extends Controller
 
         $listTable = new ListTable();
         $listTable->setName('SURETE');
-        $listTable->setRealise($row[12]);
+        $listTable->setRealise($row[13]);
         $listTable->setValue($row[15]);
         $listTable->setIdModel($model);
         $listTable->setIdUser($user);
@@ -217,7 +217,7 @@ class AdminController extends Controller
 
         $listTable = new ListTable();
         $listTable->setName('C1');
-        $listTable->setRealise($row[15]);
+        $listTable->setRealise($row[16]);
         $listTable->setValue($row[18]);
         $listTable->setIdModel($model);
         $listTable->setIdUser($user);
@@ -227,7 +227,7 @@ class AdminController extends Controller
 
         $listTable = new ListTable();
         $listTable->setName('C2');
-        $listTable->setRealise($row[18]);
+        $listTable->setRealise($row[19]);
         $listTable->setValue($row[21]);
         $listTable->setIdModel($model);
         $listTable->setIdUser($user);
@@ -237,8 +237,8 @@ class AdminController extends Controller
 
         $listTable = new ListTable();
         $listTable->setName('LICENCE');
-        $listTable->setRealise($row[20]);
-        $listTable->setValue($row[20]);
+        $listTable->setRealise($row[21]);
+        $listTable->setValue($row[21]);
         $listTable->setIdModel($model);
         $listTable->setIdUser($user);
 

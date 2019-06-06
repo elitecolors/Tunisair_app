@@ -71,9 +71,11 @@ class MenuBuilderSubscriber implements EventSubscriberInterface
             new MenuItemModel('homepage', 'menu.homepage', 'homepage', [], 'fas fa-tachometer-alt')
         );
 
-        $event->addItem(
-            new MenuItemModel('update_file', 'Update Database', 'update_file', [], 'fab fa-wpforms')
-        );
+       // if ($this->security->isGranted('IS_ADMIN')) {
+            $event->addItem(
+                new MenuItemModel('update_file', 'Update Database', 'update_file', [], 'fab fa-wpforms')
+            );
+        //}
 
 //        $event->addItem(
   //          new MenuItemModel('html', 'Show html', 'html', [], 'fab fa-wpforms')
