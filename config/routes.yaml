@@ -34,4 +34,7 @@ print:
   path: /admin/print/{id}
   controller: App\Controller\PdfController::print
 
+print2:
+    path: /admin/print2/{id}
+    controller: App\Controller\PdfController::print2
 
