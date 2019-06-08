@@ -9,7 +9,12 @@ Please read the [theme documentation](https://github.com/kevinpapst/AdminLTEBund
 
 # Installation
 
+
 Simple as that:
+
+# should install wkhtmltopdf into prod server 
+
+sudo apt install wkhtmltopdf
 
 ```bash
 composer create-project kevinpapst/adminlte-bundle-demo

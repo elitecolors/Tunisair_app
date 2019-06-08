@@ -10,9 +10,8 @@
 namespace App\Controller;
 
 use Symfony\Component\Routing\Annotation\Route;
-use Dompdf\Dompdf;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Dompdf\Options;
+use Knp\Bundle\SnappyBundle\Snappy\Response\PdfResponse;
 
 /**
  * Pdf controller.
@@ -25,54 +24,39 @@ class PdfController extends Controller
     public function print($id)
     {
         // get user
-        $repo=$this->getDoctrine()->getRepository('App:ListTable');
+        $repo = $this->getDoctrine()->getRepository('App:ListTable');
 
         $user = $this->getUser();
 
-        $repoModel=$this->getDoctrine()->getRepository('App:Model');
+        $repoModel = $this->getDoctrine()->getRepository('App:Model');
 
-        $listable=$repo->findByUser($user->getId(),$id);
+        $listable = $repo->findByUser($user->getId(), $id);
 
-        $model=$repoModel->find($id);
+        $model = $repoModel->find($id);
 
-        $formation=array();
-        if(!empty($listable)){
-            foreach ($listable as $row){
-                $formation[$row->getName()]['realise']=$row->getRealise();
-                $formation[$row->getName()]['value']=$row->getValue();
-
+        $formation = [];
+        if (!empty($listable)) {
+            foreach ($listable as $row) {
+                $formation[$row->getName()]['realise'] = $row->getRealise();
+                $formation[$row->getName()]['value'] = $row->getValue();
             }
         }
-
-        // Configure Dompdf according to your needs
-        $pdfOptions = new Options();
-        $pdfOptions->set('defaultFont', 'Arial');
-
-        // Instantiate Dompdf with our options
-        $dompdf = new Dompdf($pdfOptions);
 
         // Retrieve the HTML generated in our twig file
         $html = $this->renderView('default/print.html.twig', [
             'formation' => $formation,
-            'user'=>$user,
-            'model'=>$model
+            'user' => $user,
+            'model' => $model,
         ]);
 
-        // Load HTML to Dompdf
-        $dompdf->loadHtml($html);
-
-        // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
-        $dompdf->setPaper('A4', 'portrait');
-
-        // Render the HTML as PDF
-        $dompdf->render();
-
-
-
-        // Output the generated PDF to Browser (force download)
-        $dompdf->stream("mypdf.pdf", [
-            "Attachment" => false
+        $html = $this->renderView('pdf/pdf.html.twig', [
+            'some' => $formation,
         ]);
+
+        return new PdfResponse(
+            $this->get('knp_snappy.pdf')->getOutputFromHtml($html),
+            'file.pdf'
+        );
     }
 
     /**
@@ -81,55 +65,32 @@ class PdfController extends Controller
     public function print2($id)
     {
         // get user
-        $repo=$this->getDoctrine()->getRepository('App:ListTable');
+        $repo = $this->getDoctrine()->getRepository('App:ListTable');
 
         $user = $this->getUser();
 
-        $repoModel=$this->getDoctrine()->getRepository('App:Model');
+        $repoModel = $this->getDoctrine()->getRepository('App:Model');
 
-        $listable=$repo->findByUser($user->getId(),$id);
+        $listable = $repo->findByUser($user->getId(), $id);
 
-        $model=$repoModel->find($id);
+        $model = $repoModel->find($id);
 
-        $formation=array();
-        if(!empty($listable)){
-            foreach ($listable as $row){
-                $formation[$row->getName()]['realise']=$row->getRealise();
-                $formation[$row->getName()]['value']=$row->getValue();
-
+        $formation = [];
+        if (!empty($listable)) {
+            foreach ($listable as $row) {
+                $formation[$row->getName()]['realise'] = $row->getRealise();
+                $formation[$row->getName()]['value'] = $row->getValue();
             }
         }
-
-        // Configure Dompdf according to your needs
-        $pdfOptions = new Options();
-        $pdfOptions->set('defaultFont', 'Arial');
-
-        // Instantiate Dompdf with our options
-        $dompdf = new Dompdf($pdfOptions);
-
-        // Retrieve the HTML generated in our twig file
-        $html = $this->renderView('default/print_2_html.html.twig', [
+        $html = $this->renderView('pdf/pdf.html.twig', [
             'formation' => $formation,
             'user'=>$user,
             'model'=>$model
         ]);
 
-        // Load HTML to Dompdf
-        $dompdf->loadHtml($html);
-
-        // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
-        $dompdf->setPaper('A4', 'portrait');
-
-        // Render the HTML as PDF
-        $dompdf->render();
-
-
-
-        // Output the generated PDF to Browser (force download)
-        $dompdf->stream("mypdf.pdf", [
-            "Attachment" => false
-        ]);
+        return new PdfResponse(
+            $this->get('knp_snappy.pdf')->getOutputFromHtml($html),
+            'file.pdf'
+        );
     }
-
-
 }

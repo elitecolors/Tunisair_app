@@ -16,9 +16,9 @@
             'color' : 'aqua',
             'icon'  : 'fas fa-comments',
             } %}
-                {% block box_text %}User name {% endblock %}
-                {% block box_number %}999.9{% endblock %}
-                {% block progress_description %}Works as well without progress bar{% endblock %}
+                {% block box_text %}{{ user.getUserName() }} {% endblock %}
+                {% block box_number %}{{ user.getStufNumber() }}{% endblock %}
+                {% block progress_description %}{% endblock %}
             {% endembed %}
 
         </div>
