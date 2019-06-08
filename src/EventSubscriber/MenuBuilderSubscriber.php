@@ -68,12 +68,12 @@ class MenuBuilderSubscriber implements EventSubscriberInterface
     public function onSetupNavbar(SidebarMenuEvent $event)
     {
         $event->addItem(
-            new MenuItemModel('homepage', 'menu.homepage', 'homepage', [], 'fas fa-tachometer-alt')
+            new MenuItemModel('homepage', 'Tableau de bord', 'homepage', [], 'fas fa-tachometer-alt')
         );
 
         if ($this->security->isGranted('ROLE_ADMIN')) {
             $event->addItem(
-                new MenuItemModel('update_file', 'Update Database', 'update_file', [], 'fab fa-wpforms')
+                new MenuItemModel('update_file', 'Mis a jour', 'update_file', [], 'fab fa-wpforms')
             );
         }
 
@@ -104,7 +104,7 @@ class MenuBuilderSubscriber implements EventSubscriberInterface
 
         if ($this->security->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             $event->addItem(
-                new MenuItemModel('logout', 'menu.logout', 'fos_user_security_logout', [], 'fas fa-sign-out-alt')
+                new MenuItemModel('logout', 'Déconnexion', 'fos_user_security_logout', [], 'fas fa-sign-out-alt')
             );
         } else {
             $event->addItem(

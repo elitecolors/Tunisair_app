@@ -3,39 +3,28 @@
     Demo of the "avanzu shim layout" capabilities
 #}
 
-{% block document_title %}Dashboard browser title{% endblock %}
-{% block page_title %}Dashboard example{% endblock %}
+{% block document_title %}Tableau de bord{% endblock %}
+{% block page_title %}Tableau de bord{% endblock %}
+{% block page_subtitle %}  {% endblock %}
 
 {% block page_content %}
     <div class="row">
-        <div class="col-md-6">
-            {# ... infobox widget, solid background ... #}
-            {% embed '@AdminLTE/Widgets/infobox-widget.html.twig'  with {
-            'solid' : 'red',
-            'icon'  : 'far fa-star',
-            'progress' : 40
-            } %}
-
-                {% block box_text %}Vestibulum ante ipsum primis{% endblock %}
-                {% block progress_description %}The progress description{% endblock %}
-            {% endembed %}
-
-        </div>
-        <div class="col-md-6">
+        <div class="col-md-12">
 
             {# ... infobox widget, colored icon ... #}
             {% embed '@AdminLTE/Widgets/infobox-widget.html.twig'  with {
             'color' : 'aqua',
             'icon'  : 'fas fa-comments',
             } %}
-                {% block box_text %}Vestibulum ante ipsum primis{% endblock %}
+                {% block box_text %}User name {% endblock %}
                 {% block box_number %}999.9{% endblock %}
                 {% block progress_description %}Works as well without progress bar{% endblock %}
             {% endembed %}
+
         </div>
     </div>
 
-    <div class="row">
+    <div class="row hide">
         <div class="col-md-6">
             {# ... box widget with defaults ... #}
             {% embed '@AdminLTE/Widgets/box-widget.html.twig' %}

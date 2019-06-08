@@ -12,7 +12,7 @@ home:
     controller: App\Controller\AdminController::index
 
 fos_user_security:
-    prefix: /user1
+    prefix: /user
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
 
 fos_user_registration:
