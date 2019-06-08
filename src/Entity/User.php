@@ -78,10 +78,11 @@ class User extends BaseUser implements UserInterface, EquatableInterface
             return false;
         }
 
+
         if ($this->getEmail() !== $user->getEmail()) {
             return false;
         }
-
+        /**
         if (count($this->getRoles()) !== count($user->getRoles())) {
             return false;
         }
@@ -89,6 +90,7 @@ class User extends BaseUser implements UserInterface, EquatableInterface
         if (count(array_diff($this->getRoles(), $user->getRoles())) !== 0) {
             return false;
         }
+         * */
 
         return true;
     }
