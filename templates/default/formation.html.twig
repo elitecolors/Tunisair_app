@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block page_title %}{{ 'Formation'|trans }}{% endblock %}
+{% block page_title %}{{ 'Courses and training'|trans }}{% endblock %}
 {% block page_subtitle %}{% endblock %}
 
 {% block page_content %}
@@ -26,18 +26,11 @@
         </tr>
         {% endfor %}
         </tbody>
-        <tfoot>
-        <tr>
-            <th>{{ 'Name'|trans }}</th>
-            <th>{{ 'VALID TILL'|trans }}</th>
-            <th>{{ 'Realise'|trans }}</th>
-        </tr>
-        </tfoot>
     </table>
  <div class="row">
 <div class="container" style="text-align: center">
     <a href="{{ path('print2',{'id': model})  }}">
-        <button type="button" class="btn btn-primary btn-lg">Imprimer</button>
+        <button type="button" class="btn btn-primary btn-lg">{{ 'Print PDF'|trans }}</button>
     </a>
 </div>
  </div>

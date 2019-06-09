@@ -68,12 +68,12 @@ class MenuBuilderSubscriber implements EventSubscriberInterface
     public function onSetupNavbar(SidebarMenuEvent $event)
     {
         $event->addItem(
-            new MenuItemModel('homepage', 'Tableau de bord', 'homepage', [], 'fas fa-tachometer-alt')
+            new MenuItemModel('homepage', 'Dashboard', 'homepage', [], 'fas fa-tachometer-alt')
         );
 
         if ($this->security->isGranted('ROLE_ADMIN')) {
             $event->addItem(
-                new MenuItemModel('update_file', 'Mis a jour', 'update_file', [], 'fab fa-wpforms')
+                new MenuItemModel('update_file', 'Update Database', 'update_file', [], 'fab fa-wpforms')
             );
         }
 
@@ -93,7 +93,7 @@ class MenuBuilderSubscriber implements EventSubscriberInterface
 
             if(!empty($model)){
                 foreach ($model as $row){
-                    $demo = new MenuItemModel('demo', 'Formation', null, [], 'far fa-arrow-alt-circle-right');
+                    $demo = new MenuItemModel('demo', 'Courses and training', null, [], 'far fa-arrow-alt-circle-right');
                     $demo->addChild(
                         new MenuItemModel($row->getId(), $row->getName(), 'formation', array('id' => $row->getId()), 'far fa-arrow-alt-circle-down')
                     );
@@ -104,7 +104,7 @@ class MenuBuilderSubscriber implements EventSubscriberInterface
 
         if ($this->security->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             $event->addItem(
-                new MenuItemModel('logout', 'Déconnexion', 'fos_user_security_logout', [], 'fas fa-sign-out-alt')
+                new MenuItemModel('logout', 'Logout', 'fos_user_security_logout', [], 'fas fa-sign-out-alt')
             );
         } else {
             $event->addItem(
