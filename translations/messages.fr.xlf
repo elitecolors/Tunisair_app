@@ -11,20 +11,28 @@
                 <target>PROFICIENCY CHECK / C2</target>
             </trans-unit>
            <trans-unit id="m_formation">
-                           <source>FH</source>
-                           <target>CRM</target>
+                   <source>FH</source>
+                   <target>CRM</target>
            </trans-unit>
             <trans-unit id="s_formation">
-                           <source>S.S./1an</source>
-                           <target>SAFETY AND RESCUE</target>
+                   <source>S.S./1an</source>
+                   <target>SAFETY AND RESCUE</target>
            </trans-unit>
            <trans-unit id="d_formation">
-                           <source>SURETE</source>
-                           <target>SECURITY</target>
+                   <source>SURETE</source>
+                   <target>SECURITY</target>
           </trans-unit>
           <trans-unit id="ds_formation">
-                                     <source>M.D./2ans</source>
-                                     <target>DANGEROUS GOODS</target>
+                     <source>M.D./2ans</source>
+                     <target>DANGEROUS GOODS</target>
+          </trans-unit>
+          <trans-unit id="Formation">
+                       <source>Formation</source>
+                       <target>Courses et training</target>
+          </trans-unit>
+          <trans-unit id="Realise">
+                                 <source>Realise</source>
+                                 <target>PASSED ON</target>
           </trans-unit>
         </body>
     </file>

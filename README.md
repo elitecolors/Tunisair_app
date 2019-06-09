@@ -15,6 +15,7 @@ Simple as that:
 # should install wkhtmltopdf into prod server 
 
 sudo apt install wkhtmltopdf
+sudo apt install xvfb
 
 knp_snappy:
    pdf:
