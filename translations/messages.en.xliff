@@ -22,6 +22,30 @@
                 <source>forms.title</source>
                 <target>Form theme showcase</target>
             </trans-unit>
+            <trans-unit id="c1_formation">
+                            <source>C1</source>
+                            <target>PROFICIENCY CHECK / C1</target>
+                        </trans-unit>
+                        <trans-unit id="c2_formation">
+                            <source>C2</source>
+                            <target>PROFICIENCY CHECK / C2</target>
+                        </trans-unit>
+                       <trans-unit id="m_formation">
+                               <source>FH</source>
+                               <target>CRM</target>
+                       </trans-unit>
+                        <trans-unit id="s_formation">
+                               <source>S.S./1an</source>
+                               <target>SAFETY AND RESCUE</target>
+                       </trans-unit>
+                       <trans-unit id="d_formation">
+                               <source>SURETE</source>
+                               <target>SECURITY</target>
+                      </trans-unit>
+                      <trans-unit id="ds_formation">
+                                 <source>M.D./2ans</source>
+                                 <target>DANGEROUS GOODS</target>
+                      </trans-unit>
         </body>
     </file>
 </xliff>
