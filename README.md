@@ -16,6 +16,12 @@ Simple as that:
 
 sudo apt install wkhtmltopdf
 
+knp_snappy:
+   pdf:
+       enabled:    true
+       binary:     "xvfb-run wkhtmltopdf"
+       options:    []
+
 ```bash
 composer create-project kevinpapst/adminlte-bundle-demo
 ```

@@ -22,6 +22,10 @@
                            <source>SURETE</source>
                            <target>SECURITY</target>
           </trans-unit>
+          <trans-unit id="ds_formation">
+                                     <source>M.D./2ans</source>
+                                     <target>DANGEROUS GOODS</target>
+          </trans-unit>
         </body>
     </file>
 </xliff>
