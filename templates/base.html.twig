@@ -9,7 +9,7 @@
             <span class="label label-primary">{{ app_locales|length }}</span>
         </a>
         <ul class="dropdown-menu">
-            <li class="header">Change language (scroll for more)</li>
+            <li class="header">{{ 'Change language'|trans }}</li>
             <li>
                 <ul class="menu">
                     {% for locale in app_locales %}

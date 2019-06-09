@@ -34,6 +34,10 @@
                                  <source>Realise</source>
                                  <target>PASSED ON</target>
           </trans-unit>
+          <trans-unit id="Change language">
+                                           <source>Change language</source>
+                                           <target>Sélectionner la langue</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
